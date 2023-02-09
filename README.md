@@ -15,7 +15,7 @@ Examples
 ```      
     Windows  
 ```      
-      *python3 xlsx_main.py -i 'python_csv_test-ansi_format_and_header.txt' -o 'python_test.xlsx' -d ';'  -t 1 -f 1*
+      python3 xlsx_main.py -i 'python_csv_test-ansi_format_and_header.txt' -o 'python_test.xlsx' -d ';'  -t 1 -f 1
 ```
 
 ## Input parameters
@@ -33,6 +33,13 @@ Examples
 * title       Indicates whether or not there is a header line in the input file 0=False, 1= True
               If there is a header line in the input file it must be the line after any format line.
               Default is 0 (false)
+## Formats
+The format denotes the data type for the column values (excluding the header line)
+
+Valid formats
+* generic     Writes text as is
+* float       Writes the data as float. The input data is expected to use a full stop as the decimal separator. E.g. 250.50
+* int         Writes the data as int. 
 
 ## Example files
       

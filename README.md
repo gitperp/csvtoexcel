@@ -19,7 +19,7 @@ Examples
 ```
 
 ## Input parameters
-* inputfile   Name of the input file
+* inputfile   Name of the input file. Encoding is ISO-8859-1
 * outputfile  Name of the output file    
 * delimiter   Field delimiter in csv file. 
               Default is comma
@@ -41,12 +41,28 @@ Valid formats
 * float       Writes the data as float. The input data is expected to use a full stop as the decimal separator. E.g. 250.50
 * int         Writes the data as int. 
 
+## Validation
+If a format line is provided, the formats are validated before the rest of the file is treated. Leading and trailing spaces are stripped from the format.
+Invalid formats are printed to the standard output. 
+
 ## Example files
       
 ### Header line, no format line
+```
+generic;int,float
+Id;No of items;Price per item
+AABZ;100;36.50
+AACR;3500;22.00
+
+```
       
-      
-### Header line and format lne
+### Header line and format line
+```
+generic;int,float  
+Id;No of items;Price per item  
+AABZ;100;36.50  
+AACR;3500;22.00  
+```
       
 ### Format line, no header line
       

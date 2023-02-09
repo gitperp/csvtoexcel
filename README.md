@@ -3,13 +3,17 @@
 This program reads a csv file and creates a file in Excel format
 
 Command format to run:
+```
       xlsx_main.py -i <inputfile> -o <outputfile> -d <delimiter> -t <title 1=y, 0=n> -f <format 1=y, 0=n>
-Example 
-    OpenVMS
+```
+Examples  
+
+    OpenVMS  
+    
 ```
       python xlsx_main.py -i "transakt.csv" -o "transakt.xlsx" -d ";" -t 1 -f 1
 ```      
-    Windows
+    Windows  
 ```      
       *python3 xlsx_main.py -i 'python_csv_test-ansi_format_and_header.txt' -o 'python_test.xlsx' -d ';'  -t 1 -f 1*
 ```

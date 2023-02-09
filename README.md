@@ -1,4 +1,4 @@
-#This program reads a csv file and creates a file in Excel format
+# This program reads a csv file and creates a file in Excel format
 
 Command format to run:
       xlsx_main.py -i <inputfile> -o <outputfile> -d <delimiter> -t <title 1=y, 0=n> -f <format 1=y, 0=n>

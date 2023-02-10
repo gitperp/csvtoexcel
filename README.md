@@ -6,16 +6,9 @@ Command format to run:
 ```
       xlsx_main.py -i <inputfile> -o <outputfile> -d <delimiter> -t <title 1=y, 0=n> -f <format 1=y, 0=n>
 ```
-Examples  
-
-    OpenVMS  
-    
-```
-      python xlsx_main.py -i "transakt.csv" -o "transakt.xlsx" -d ";" -t 1 -f 1
+Example  
 ```      
-    Windows  
-```      
-      python3 xlsx_main.py -i 'python_csv_test-ansi_format_and_header.txt' -o 'python_test.xlsx' -d ';'  -t 1 -f 1
+      python3 xlsx_main.py -i 'test_format_and_header.txt' -o 'python_test.xlsx' -d ';'  -t 1 -f 1
 ```
 
 ## Input parameters
@@ -42,8 +35,15 @@ Valid formats
 * int         Writes the data as int. 
 
 ## Validation
+### Format 
 If a format line is provided, the formats are validated before the rest of the file is treated. Leading and trailing spaces are stripped from the format.
 Invalid formats are printed to the standard output. 
+
+### Int and float
+Cells denoted as int or float are validated before attempting to write them to the Excel file.
+
+### Error logging
+
 
 ## Example files
       

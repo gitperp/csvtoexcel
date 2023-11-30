@@ -25,7 +25,7 @@ Example
               Default is 0 (false)
 * title       Indicates whether or not there is a header line in the input file 0=False, 1= True
               If there is a header line in the input file it must be the line after any format line.
-              Default is 0 (false)
+              Default is 1 (false)
 ## Formats
 The format denotes the data type for the column values (excluding the header line)
 

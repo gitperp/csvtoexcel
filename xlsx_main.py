@@ -15,7 +15,7 @@ import csv
 
 # Input parameters
 # ----------------
-# - inputfile   Name of the input file
+# - inputfile   Name of the input file. Encoding is ISO8859-1
 # - outputfile  Name of the output file    
 # - delimiter   Field delimiter in csv file. 
 #               Default is comma
@@ -41,12 +41,20 @@ if sys.platform == 'OpenVMS':
 
 
 input_file_encoding = "ISO8859-1"
-#input_file_encoding = "ANSI"
 
 # Check if value is a float
 def isfloat(value):
     try:
         a = float(value)
+    except (TypeError, ValueError):
+        return False
+    else:
+        return True
+
+# Check if value is an integer 
+def isint(value):
+    try:
+        a = int(value)
     except (TypeError, ValueError):
         return False
     else:
@@ -63,7 +71,7 @@ def validateFormats(validFormats, formatRow, formatDict):
     for column_count, col in enumerate(formatRow):
         if not (isValidFormat(validFormats, col.strip())):
             isValid = False
-            print('#### ' + col + ' is not a valid format')
+            print('#### ' + str(col) + ' in column number ' + str(column_count) + ' is not a valid format')
         formatDict[column_count] = col
 
     # Validate all columns in the format line before returning
@@ -87,7 +95,6 @@ def main_prog(infile, outfile, delimiter, hasTitle, hasFormatLine, validFormats)
     worksheet = workbook.add_worksheet()
     
     formatDict = {}
-    
     
     # If a format line is provided, is must be the first line
     if (hasFormatLine > 0):
@@ -120,11 +127,25 @@ def main_prog(infile, outfile, delimiter, hasTitle, hasFormatLine, validFormats)
                     elif hasFormatLine > 0:
                        format = formatDict[column_count].strip()
                        if (format == 'int'):
-                            worksheet.write(row_count_outfile, column_count, int(col))
+                            if isint(col):
+                               worksheet.write(row_count_outfile, column_count, int(col))
+                            else:
+                                print('#### ' + str(col) + ' in column number ' + str(column_count) + ' is not an integer')
+                                sys.exit(1)
                        elif (format == 'float'):
-                            worksheet.write(row_count_outfile, column_count, float(col))
-                       else:
+                            if isfloat(col):
+                               worksheet.write(row_count_outfile, column_count, float(col))
+                            else:
+                                print('#### ' + str(col) + ' in column number ' + str(column_count) + ' is not a float')
+                                sys.exit(1)
+                       elif (format == 'generic'):
                             worksheet.write(row_count_outfile, column_count, col)
+                       else:
+                            interest_format = workbook.add_format({'num_format': format})
+                            if isfloat(col):
+                               worksheet.write(row_count_outfile, column_count, float(col), interest_format)
+                            else:
+                                print('#### ' + str(col) + ' in column number ' + str(column_count) + ' is not a float')
                     else:
                         worksheet.write(row_count_outfile, column_count, col)
                 row_count_outfile += 1
@@ -175,7 +196,7 @@ def main(argv):
 
 
 # Valid formats
-    validFormats = ('generic', 'float', 'int')
+    validFormats = ('generic', 'float', 'int', '0.0', '0.00', '0.000', '0.0000', '0.00000', '0.000000', '0.0000000', '0.00000000')
 
 
 # Default values     
@@ -183,12 +204,12 @@ def main(argv):
         delimiter = ';'
     if inputfile == '':
         # inputfile = 'python_csv_test-ansi_header.txt'
-        # inputfile = 'python_csv_test-ansi_format.txt'
-        inputfile = 'python_csv_test-ansi_format_error.txt'
+        inputfile = 'python_csv_test-ansi_format.txt'
+        # inputfile = 'python_csv_test-ansi_format_error.txt'
         # inputfile = 'python_csv_test-ansi_format_and_header.txt'
     if outputfile == '':
         outputfile = 'python_csv_test.xlsx'
-    # hasTitle = 1
+    # hasTitle = 0
     # hasFormatLine = 1
     print()
     print('Parameters:')

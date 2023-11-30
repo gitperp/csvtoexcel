@@ -19,7 +19,7 @@ Example
 * format      Indicates whether or not there is a format line in the input file 0=False, 1= True
               Data type per column. Ex generic;int;float;generic
               If there is a format line in the input file, it must be the first line
-              The valid types are generic, int and float
+              The valid types are generic, int and float, and 0.00, 0.000, 0.0000, 0.00000, 0.000000, 0.0000000, 0.00000000
               Formats are validated. Any invalid format is printed to standard output, and the 
               program exits.
               Default is 0 (false)
@@ -30,9 +30,16 @@ Example
 The format denotes the data type for the column values (excluding the header line)
 
 Valid formats
-* generic     Writes text as is
-* float       Writes the data as float. The input data is expected to use a full stop as the decimal separator. E.g. 250.50
-* int         Writes the data as int. 
+* generic       Writes text as is
+* float         Writes the data as float. The input data is expected to use a full stop as the decimal separator. E.g. 250.50
+* int           Writes the data as int.
+* 0.00          Writes the data as float with two decimals.
+* 0.000         Writes the data as float with three decimals.
+* 0.0000        Writes the data as float with four decimals.
+* 0.00000       Writes the data as float with five decimals.
+* 0.000000      Writes the data as float with six decimals.
+* 0.0000000     Writes the data as float with seven decimals.
+* 0.00000000    Writes the data as float with eight decimals.
 
 ## Validation
 ### Format 
@@ -49,7 +56,6 @@ Cells denoted as int or float are validated before attempting to write them to t
       
 ### Header line, no format line
 ```
-generic;int,float
 Id;No of items;Price per item
 AABZ;100;36.50
 AACR;3500;22.00
@@ -58,10 +64,10 @@ AACR;3500;22.00
       
 ### Header line and format line
 ```
-generic;int,float  
-Id;No of items;Price per item  
-AABZ;100;36.50  
-AACR;3500;22.00  
+generic;int;float;0.000000
+Id;No of items;Price per item;Interest
+AABZ;100;36.50;13.42145
+AACR;3500;22.00;9.223344
 ```
       
 ### Format line, no header line

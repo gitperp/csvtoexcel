@@ -17,11 +17,16 @@ Example
 * delimiter   Field delimiter in csv file. 
               Default is comma
 * format      Indicates whether or not there is a format line in the input file 0=False, 1= True
+
               Data type per column. Ex generic;int;float;generic
-              If there is a format line in the input file, it must be the first line
+  
+              If there is a format line in the input file, it must be the first line.
+  
               The valid types are generic, int and float, and 0.00, 0.000, 0.0000, 0.00000, 0.000000, 0.0000000, 0.00000000
+  
               Formats are validated. Any invalid format is printed to standard output, and the 
               program exits.
+  
               Default is 0 (false)
 * title       Indicates whether or not there is a header line in the input file 0=False, 1= True
               If there is a header line in the input file it must be the line after any format line.
